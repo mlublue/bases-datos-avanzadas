@@ -31,6 +31,7 @@ if (file_exists($xml)) {
   return json_encode($xmlL);    
 }
 
+//linea de prueba
 
 //imprimiendo el archivo peliculas a traves de la funcion XMLtoJSON que codifica los archivos
 //print_r (XMLtoJSON('prueba.xml'));
