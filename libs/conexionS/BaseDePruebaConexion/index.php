@@ -1,5 +1,5 @@
 <?php
-require_once('baseDeDatos.php');
+require_once('BaseDeDatos_class.php');
 
 error_reporting(E_ALL);
 $action = 'adddb';
