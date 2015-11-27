@@ -11,12 +11,12 @@ class BaseDeDatos
  
 private $campos=null;
 private $donde=null;
-
+private $valores=null;
 
   public function __construct($host = null, $usuario = null, $contrasena = null, $bd = null)
     {
-    	$this->host = $host;
- 		$this->usuario = $usuario;
+        $this->host = $host;
+        $this->usuario = $usuario;
         $this->contrasena = $contrasena;
         $this->bd = $bd;
 
@@ -54,28 +54,47 @@ public function conexion()
 
 
 public function definir_donde($campo, $contenido, $operador="="){
-	if($this->donde==""){
-		$this->donde=$campo.$operador.$contenido;
-	}else{
-		$this->donde=$this->donde." AND".$campo.$operador.$contenido;
-	}
+    if($this->donde==""){
+        $this->donde=$campo.$operador.$contenido;
+    }else{
+        $this->donde=$this->donde." AND".$campo.$operador.$contenido;
+    }
 
 }
 
 public function definir_campos($campo){
-	if($this->campos==""){
-		$this->campos=$campo;
-	}else{
-		$this->campos=$this->campos.", ".$campo;
-	}
+    if($this->campos==""){
+        $this->campos=$campo;
+    }else{
+        $this->campos=$this->campos.", ".$campo;
+    }
 
 }
 
 
 
 public function obtener($tabla, $limite=null){
-	$sentencia="SELECT ".($this->campos!=null?$this->campos:'*').' FROM '.$tabla.($this->donde!=null?' WHERE '.$this->donde:'').';';
+    $sentencia="SELECT ".($this->campos!=null?$this->campos:'*').' FROM '.$tabla.($this->donde!=null?' WHERE '.$this->donde:'').';';
 
-		return $this->mysqli->query($sentencia);
+        return $this->mysqli->query($sentencia);
 }
+
+public function definir_valores($valor){
+    if($this->valores==""){
+        $this->valores=$valor;
+    }else{
+        $this->valores=$this->valores.", ".$valor;
+    }
+
+}
+public function insertar($tabla){
+    if ($this->valores) {
+        $sentencia="INSERT INTO ".$tabla.($this->campos!=null?' ('.$this->campos.')':'').' VALUES ('.$this->valores.')';
+        echo $sentencia;
+        return $this->mysqli->query($sentencia);
+    }else{
+        echo "No hay valores para insertar en la tabla " .$tabla;
+    }
+}
+
 }

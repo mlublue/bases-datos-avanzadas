@@ -1,6 +1,5 @@
 <?php
 require_once('BaseDeDatos_class.php');
-
 error_reporting(E_ALL);
 $action = 'adddb';
 $data = array();
@@ -26,12 +25,17 @@ function action_adddb () {
     $db->definir_campos('colonia');
     $db->definir_campos('codigo_postal');
     $db->definir_campos('rfc');
+    $db->definir_valores('"'.$_POST['Nombre'].'"');
+    $db->definir_valores('"'.$_POST['Colonia'].'"');
+    $db->definir_valores('"'.$_POST['CódigoPostal'].'"');
+    $db->definir_valores('"'.$_POST['rfc'].'"');
+    $db->insertar ('receptor');
     //header ("Location: index.php");
     exit;
 }
 
 
-//Esto comenzará a funcionar cuando la clase mysqlidb este funcionando
+//Esto comenzará a funcionar cuando la clase BaseDeDatos_class este funcionando
 
 $db = new baseDeDatos ('localhost', 'root', '', 'pruebas');
 if ($_GET) {
