@@ -94,7 +94,7 @@ public function insertar($tabla){
         return $this->mysqli->query($sentencia);
     }else{
         echo "No hay valores para insertar en la tabla " .$tabla;
-    }
+     }
 }
 
 }
